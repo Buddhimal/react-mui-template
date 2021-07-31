@@ -5,6 +5,8 @@ import {
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, ListItem } from '@material-ui/core';
+import theme from "../../../theme";
+import {red} from "@material-ui/core/colors";
 
 const NavItem = ({
                      href,
@@ -14,11 +16,11 @@ const NavItem = ({
                  }: any) => {
     const location = useLocation();
 
-    // @ts-ignore
-    const active = href ? !!matchPath({
-        path: href,
-        end: false
-    }, location.pathname) : false;
+    const active = href ? !!matchPath(href, {
+        path: `/`+location.pathname.split('/')[1],
+        exact: true,
+        strict: false
+    }) : false;
 
     return (
         <ListItem
@@ -32,15 +34,16 @@ const NavItem = ({
             <Button
                 component={RouterLink}
                 style={{
-                    color: 'text.secondary',
                     fontWeight: "normal",
                     justifyContent: 'flex-start',
                     letterSpacing: 0,
                     // py: 1.25,
                     textTransform: 'none',
                     width: '100%',
-                    ...(active && {
-                        color: 'primary.main'
+                    ...(active ? {
+                        color: theme.palette.text.primary
+                    }: {
+                        color: theme.palette.text.secondary
                     }),
                     // '& svg': {
                     //     mr: 1

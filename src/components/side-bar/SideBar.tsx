@@ -27,6 +27,11 @@ const items = [
         icon: BarChartIcon,
         title: 'Dashboard'
     },
+    {
+        href: '/test',
+        icon: BarChartIcon,
+        title: 'Dashboard2'
+    },
 ];
 
 const SideBar = ({ onMobileClose, openMobile }: any) => {
@@ -111,7 +116,7 @@ const SideBar = ({ onMobileClose, openMobile }: any) => {
                     {content}
                 </Drawer>
             </Hidden>
-            <Hidden lgDown>
+            <Hidden mdDown>
                 <Drawer
                     anchor="left"
                     open

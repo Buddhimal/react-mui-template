@@ -16,6 +16,12 @@ const App = () => {
                     component={Dashboard}
                     location={null}
                 />
+                <DefaultLayout
+                    exact
+                    path="/test"
+                    component={Dashboard}
+                    location={null}
+                />
             </Switch>
         </BrowserRouter>
     );
