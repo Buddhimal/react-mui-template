@@ -1,149 +1,45 @@
-import { useEffect } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import {
-    Avatar,
-    Box,
-    Divider,
-    Drawer,
-    Hidden,
-    List,
-    Typography
-} from '@material-ui/core';
-import {
-    BarChart as BarChartIcon,
-} from 'react-feather';
-import NavItem from "./nav-item/NavItem";
+import {useLocation } from 'react-router-dom';
+import classNames from "classnames";
+import useStyles from "./styles";
+import "./styles.css";
 
-const user = {
-    avatar: '/static/images/avatars/avatar_6.png',
-    jobTitle: 'Senior Developer',
-    name: 'Katarina Smith'
-};
+// const user = {
+//     avatar: '/static/images/avatars/avatar_6.png',
+//     jobTitle: 'Senior Developer',
+//     name: 'Katarina Smith'
+// };
 
-const items = [
-    {
-        href: '/',
-        icon: BarChartIcon,
-        title: 'Dashboard'
-    },
-    {
-        href: '/test',
-        icon: BarChartIcon,
-        title: 'Dashboard2'
-    },
-];
+// const items = [
+//     {
+//         href: '/',
+//         icon: BarChartIcon,
+//         title: 'Dashboard'
+//     },
+//     {
+//         href: '/test',
+//         icon: BarChartIcon,
+//         title: 'Dashboard2'
+//     },
+// ];
 
 const SideBar = ({ onMobileClose, openMobile }: any) => {
     const location = useLocation();
-
-    useEffect(() => {
-        if (openMobile && onMobileClose) {
-            onMobileClose();
-        }
-    }, [location.pathname]);
-
-    const content = (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                height: '100%'
-            }}
-        >
-            <Box
-                sx={{
-                    alignItems: 'center',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    p: 2
-                }}
-            >
-                <Avatar
-                    component={RouterLink}
-                    src={user.avatar}
-                    style={{
-                        cursor: 'pointer',
-                        width: 64,
-                        height: 64
-                    }}
-                    to="/app/account"
-                />
-                <Typography
-                    color="textPrimary"
-                    variant="h5"
-                >
-                    {user.name}
-                </Typography>
-                <Typography
-                    color="textSecondary"
-                    variant="body2"
-                >
-                    {user.jobTitle}
-                </Typography>
-            </Box>
-            <Divider />
-            <Box sx={{ p: 2 }}>
-                <List>
-                    {items.map((item) => (
-                        <NavItem
-                            href={item.href}
-                            key={item.title}
-                            title={item.title}
-                            icon={item.icon}
-                        />
-                    ))}
-                </List>
-            </Box>
-            <Box sx={{ flexGrow: 1 }} />
-        </Box>
-    );
+    const classes = useStyles();
 
     return (
-        <>
-            <Hidden lgUp>
-                <Drawer
-                    anchor="left"
-                    onClose={onMobileClose}
-                    open={openMobile}
-                    variant="temporary"
-                    PaperProps={{
-                        style: {
-                            width: 256
-                        }
-                    }}
-                >
-                    {content}
-                </Drawer>
-            </Hidden>
-            <Hidden mdDown>
-                <Drawer
-                    anchor="left"
-                    open
-                    variant="persistent"
-                    PaperProps={{
-                        style: {
-                            width: 256,
-                            top: 64,
-                            height: 'calc(100% - 64px)'
-                        }
-                    }}
-                >
-                    {content}
-                </Drawer>
-            </Hidden>
-        </>
+        <div
+            // className={"sidebar open"}>
+            className={classNames(classes.sidebar,"sidebar open")}>
+            <ul className="nav-list">
+                <li>
+                    <a href="#">
+                        <i className='bx bx-grid-alt'></i>
+                        <span className="links_name">Dashboard</span>
+                    </a>
+                    <span className="tooltip">Dashboard</span>
+                </li>
+            </ul>
+        </div>
     );
 };
-
-SideBar.propTypes = {
-    onMobileClose: PropTypes.func,
-    openMobile: PropTypes.bool
-};
-
-SideBar.defaultProps = {
-    onMobileClose: () => { },
-    openMobile: false
-};
-
 export default SideBar;
