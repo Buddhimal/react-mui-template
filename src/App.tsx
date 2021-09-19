@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import DefaultLayout from "./layouts/default-layout/DefaultLayout";
 import Dashboard from "./components/dashboard/Dashboard";
 import GlobalStyles from "./GlobalStyles";
+import DashboardTwo from "./components/dashboard-two/DashboardTwo";
 
 const App = () => {
     return (
@@ -19,7 +20,7 @@ const App = () => {
                 <DefaultLayout
                     exact
                     path="/test"
-                    component={Dashboard}
+                    component={DashboardTwo}
                     location={null}
                 />
             </Switch>
